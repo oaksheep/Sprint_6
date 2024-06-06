@@ -10,8 +10,9 @@ class TestOrder:
     @allure.title('Проверка создания заказа')
     @allure.description('Появление окна "Проверить статус"')
     @pytest.mark.parametrize('name, surname, address, phone', [*data.RegistrationDetails.reg_data_order])
-    def test_order_true(self, driver, click_cookie, name, surname, address, phone):
+    def test_order_true(self, driver, name, surname, address, phone):
         main_page = MainPage(driver)
+        main_page.click_cookie()
         order_page = OrderPage(driver)
         main_page.check_and_click_order_header()
         order_page.set_data_order(name, surname, address, phone)
@@ -22,8 +23,9 @@ class TestOrder:
         assert text_in_button == 'Посмотреть статус'
 
     @allure.title('Проверка заказа по кнопке заказа внизу страницы')
-    def test_button_order_center_div(self, driver, click_cookie):
+    def test_button_order_center_div(self, driver):
         main_page = MainPage(driver)
+        main_page.click_cookie()
         main_page.check_button_order_is_clickable()
         main_page.click_button_order_div()
         current_url = main_page.get_current_url()

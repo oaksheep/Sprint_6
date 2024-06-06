@@ -3,12 +3,17 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait as Wait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+from locators.main_page_locators import MainPageLocators
 
 
 class BasePage:
 
     def __init__(self, driver):
         self.driver = driver
+
+    @allure.step('Клик на куки')
+    def click_cookie(self):
+        self.driver.find_element(*MainPageLocators.coolie_button).click()
 
     @allure.step('Скролл вниз страницы')
     def scroll_to_down_page(self):
